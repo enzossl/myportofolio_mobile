@@ -27,6 +27,38 @@ class MyHomePage extends StatelessWidget {
           style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
         ),
         backgroundColor: Theme.of(context).colorScheme.primary,
+        //tambahan tombol about me di pojok kanan app untuk fitur tmbhan
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.info_outline, color: Colors.white),
+            tooltip: 'About Me',
+            onPressed: () {
+              showDialog<void>(
+                context: context,
+                builder: (dialogContext) {
+                  return AlertDialog(
+                    title: const Text('About Me'),
+                    content: Text(
+                      'Name: $nama\n'
+                      'NPM: $npm\n'
+                      'Class: $kelas\n\n'
+                      'Saya sedang mempelajari pengembangan '
+                      'aplikasi dengan Flutter.',
+                    ),
+                    actions: [
+                      TextButton(
+                        onPressed: () {
+                          Navigator.of(dialogContext).pop();
+                        },
+                        child: const Text('Tutup'),
+                      ),
+                    ],
+                  );
+                },
+              );
+            },
+          ),
+        ],
       ),
       // Body halaman utama dengan padding di sekelilingnya.
       body: Padding(
