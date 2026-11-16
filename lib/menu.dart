@@ -12,11 +12,11 @@ class MyHomePage extends StatelessWidget {
   final String kelas = "PBP B";
 
   final List<ItemHomepage> items = [
-    ItemHomepage("Lihat Proyek", Icons.folder, Colors.blue.shade700,),
-    ItemHomepage("Tambah Proyek", Icons.add_circle,Colors.green.shade700,),
-    ItemHomepage("Logout", Icons.logout, Colors.red.shade700,),
+    ItemHomepage("Lihat Proyek", Icons.folder, Colors.blue.shade700),
+    ItemHomepage("Tambah Proyek", Icons.add_circle, Colors.green.shade700),
+    ItemHomepage("Logout", Icons.logout, Colors.red.shade700),
   ];
-  
+
   @override
   Widget build(BuildContext context) {
     // Scaffold menyediakan struktur visual dasar halaman (AppBar, Body, SnackBar).
@@ -25,10 +25,7 @@ class MyHomePage extends StatelessWidget {
       appBar: AppBar(
         title: const Text(
           'MyPortfolio',
-          style: TextStyle(
-            color: Colors.white,
-            fontWeight: FontWeight.bold,
-          ),
+          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
         ),
         backgroundColor: Theme.of(context).colorScheme.primary,
       ),
@@ -86,7 +83,6 @@ class MyHomePage extends StatelessWidget {
       ),
     );
   }
-
 }
 
 class InfoCard extends StatelessWidget {
@@ -108,10 +104,7 @@ class InfoCard extends StatelessWidget {
         // Menyusun teks title dan content secara vertikal.
         child: Column(
           children: [
-            Text(
-              title,
-              style: const TextStyle(fontWeight: FontWeight.bold),
-            ),
+            Text(title, style: const TextStyle(fontWeight: FontWeight.bold)),
             const SizedBox(height: 8.0),
             Text(content),
           ],
@@ -121,14 +114,23 @@ class InfoCard extends StatelessWidget {
   }
 }
 
+/// Menyimpan konfigurasi satu tombol aksi portofolio.
+///
+/// Warna disimpan bersama nama dan ikon agar ItemCard dapat digunakan
+/// ulang tanpa menentukan warna melalui percabangan berdasarkan nama.
 class ItemHomepage {
   final String name;
   final IconData icon;
+  // Warna diambil dari data setiap item agar tiap tombol memiliki warna berbeda.
   final Color color;
 
   ItemHomepage(this.name, this.icon, this.color);
 }
 
+/// Menampilkan tombol aksi berdasarkan data ItemHomepage.
+///
+/// Ketukan menampilkan SnackBar sesuai nama tombol. SnackBar sebelumnya
+/// disembunyikan agar pesan tidak mengantre saat tombol ditekan berulang.
 class ItemCard extends StatelessWidget {
   final ItemHomepage item;
 
@@ -137,7 +139,6 @@ class ItemCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
-      // Menggunakan warna sekunder dari skema tema aplikasi.
       color: item.color,
       borderRadius: BorderRadius.circular(12),
       child: InkWell(
@@ -147,7 +148,9 @@ class ItemCard extends StatelessWidget {
           ScaffoldMessenger.of(context)
             ..hideCurrentSnackBar()
             ..showSnackBar(
-              SnackBar(content: Text("Kamu telah menekan tombol ${item.name}!"))
+              SnackBar(
+                content: Text("Kamu telah menekan tombol ${item.name}!"),
+              ),
             );
         },
         child: Container(
@@ -156,11 +159,7 @@ class ItemCard extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Icon(
-                  item.icon,
-                  color: Colors.white,
-                  size: 30.0,
-                ),
+                Icon(item.icon, color: Colors.white, size: 30.0),
                 const Padding(padding: EdgeInsets.all(3)),
                 Text(
                   item.name,
