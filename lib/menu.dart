@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 
+/// Halaman utama portofolio yang menampilkan identitas dan tombol aksi.
+///
+/// Menggunakan StatelessWidget karena halaman ini tidak mengelola
+/// perubahan state internal.
 class MyHomePage extends StatelessWidget {
   MyHomePage({super.key});
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
   final String npm = "2506584382";
   final String nama = "Enzo Susilo";
   final String kelas = "PBP B";
@@ -37,11 +36,17 @@ class MyHomePage extends StatelessWidget {
           children: [
             // Baris horizontal untuk menampilkan 3 InfoCard secara sejajar.
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                InfoCard(title: 'NPM', content: npm),
-                InfoCard(title: 'Name', content: nama),
-                InfoCard(title: 'Class', content: kelas),
+                Expanded(
+                  child: InfoCard(title: 'NPM', content: npm),
+                ),
+                Expanded(
+                  child: InfoCard(title: 'Name', content: nama),
+                ),
+                Expanded(
+                  child: InfoCard(title: 'Class', content: kelas),
+                ),
               ],
             ),
 
@@ -98,15 +103,13 @@ class InfoCard extends StatelessWidget {
       // Memberikan efek bayangan kartu elevasi 2 unit.
       elevation: 2.0,
       child: Container(
-        // Menyesuaikan lebar kartu dengan proporsi layar (dibagi 3.5).
-        width: MediaQuery.of(context).size.width / 3.5,
         padding: const EdgeInsets.all(16.0),
         // Menyusun teks title dan content secara vertikal.
         child: Column(
           children: [
             Text(title, style: const TextStyle(fontWeight: FontWeight.bold)),
             const SizedBox(height: 8.0),
-            Text(content),
+            Text(content, textAlign: TextAlign.center),
           ],
         ),
       ),
@@ -139,6 +142,7 @@ class ItemCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
+      // Menggunakan warna yang ditentukan pada masing-masing item.
       color: item.color,
       borderRadius: BorderRadius.circular(12),
       child: InkWell(

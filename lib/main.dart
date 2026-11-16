@@ -14,14 +14,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'MyPortfolio',
       theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // Notice that the counter didn't reset back to zero; the application
-        // state is not lost during the reload. To reset the state, use hot
-        // restart instead.
-        //
-        // This works for code too, not just values: Most code changes can be
-        // tested with just a hot reload.
+        // Menentukan tema warna yang digunakan oleh komponen aplikasi.
         colorScheme: ColorScheme.fromSeed(
           seedColor: Colors.indigo,
           secondary: Colors.amber[700],
