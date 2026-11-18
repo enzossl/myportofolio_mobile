@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:myportofolio_mobile/main.dart';
 
@@ -22,6 +22,18 @@ void main() {
         find.text('Kamu telah menekan tombol $namaTombol!'),
         findsOneWidget,
       );
+
+      if (namaTombol == 'Tambah Proyek') {
+        // Memastikan kartu berhasil membuka form.
+        expect(find.text('Add Project Form'), findsOneWidget);
+
+        // Kembali ke halaman utama sebelum menguji tombol berikutnya.
+        Navigator.of(
+          tester.element(find.byType(Form)),
+        ).pop();
+
+        await tester.pumpAndSettle();
+      }
     }
 
     await tester.tap(find.byTooltip('About Me'));
